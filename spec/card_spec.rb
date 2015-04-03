@@ -9,9 +9,21 @@ describe Card do
       expect(card.value).to eq(:ace)
     end
 
-
-
-
   end
+
+  describe "::suits" do
+    it "returns an array of all suits" do
+      expect(Card.suits).to eq([:clubs, :diamonds,
+        :hearts, :spades].sort)
+    end
+  end
+
+  describe "::values" do
+    it "returns an array of all card values" do
+      expect(Card.values).to eq([:ace, :deuce, :eight, :five, :four,
+       :jack, :king, :nine, :queen, :seven, :six, :ten, :three])
+    end
+  end
+
 
 end

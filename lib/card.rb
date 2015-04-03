@@ -22,11 +22,21 @@ class Card
     :ace   => "A"
   }
 
+  def self.suits
+    SUIT_STRINGS.keys.sort
+  end
+
+  def self.values
+    VALUE_STRINGS.keys.sort
+  end
+
   attr_reader :suit, :value
 
   def initialize(suit, value)
     @suit = suit
     @value = value
   end
+
+
 
 end
