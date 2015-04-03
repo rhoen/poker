@@ -9,7 +9,7 @@ class Deck
       end
     end
 
-    cards
+    cards.shuffle
   end
 
 
