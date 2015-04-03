@@ -5,12 +5,11 @@ describe Deck do
 
   describe "::all_cards" do
     it "has 52 cards" do
-
+      expect(Deck.all_cards.count).to eq(52)
     end
 
     it  "has no duplicate cards" do
-
-
+      dedup = Deck.all_cards.
     end
 
   end
@@ -49,7 +48,6 @@ describe Deck do
 
     end
 
-    it 
 
   end
 

@@ -26,4 +26,10 @@ describe Card do
   end
 
 
+  describe "#==()" do
+    it "returns true for cards of same suit and value"
+
+    it "returns false for cards of different suit and/or value"
+  end
+
 end
