@@ -27,9 +27,15 @@ describe Card do
 
 
   describe "#==()" do
-    it "returns true for cards of same suit and value"
+    let(:card2) {Card.new(:spades, :king)}
+    let(:card3) {Card.new(:spades, :ace)}
+    it "returns true for cards of same suit and value" do
+      expect(card == card3).to eq(true)
+    end
 
-    it "returns false for cards of different suit and/or value"
+    it "returns false for cards of different suit and/or value" do
+      expect(card2 == card3).to eq(false)
+    end
   end
 
 end
