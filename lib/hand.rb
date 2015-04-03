@@ -10,6 +10,17 @@ class Hand
     cards.concat(new_cards)
   end
 
+  def remove(discarded)
+    removed = cards.select do |card|
+      discarded.include? card
+    end
+    cards.reject! do |card|
+      removed.include? card
+    end
+    # cards -= discarded
+
+    discarded
+  end
 
 
 
