@@ -98,19 +98,51 @@ class Hand
   end
 
   def straight
+    card_values = cards.map {|card| card.poker_value}
+    first = card_values.sort!.first
+    j = 0
+    first.upto(first+4) do |i|
+      return false if i != card_values[j]
+      j += 1
+    end
+
+    [:straight, card_values.last]
 
   end
 
   def flush
+    suit = cards.first.suit
+    card_values = []
+    cards.each do |card|
+      return false if card.suit != suit
+      card_values << card.poker_value
+    end
 
+    [:flush].concat(card_values.sort.reverse)
   end
 
   def full_house
-
+    triplets = []
+    frequency.each do |key, value|
+      if value == 3
+        triplets << Card.poker_values[key]
+        next
+      end
+    end
+    return false unless  triplets.count == 1 && frequency.keys.size == 2
+    [:full_house] + triplets
   end
 
   def four_of_a_kind
-
+    quad = []
+    frequency.each do |key, value|
+      if value == 4
+        quad  << Card.poker_values[key]
+        next
+      end
+    end
+    return false unless quad.count == 1
+    [:four_of_a_kind] + quad
   end
 
   def straight_flush

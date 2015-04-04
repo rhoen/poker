@@ -140,10 +140,12 @@ describe Hand do
     subject(:single_pair_hand) {Hand.new(single_pair)}
     subject(:two_pair_hand) {Hand.new(two_pair)}
     subject(:three_of_a_kind_hand) {Hand.new(three_of_a_kind)}
-    subject(:straight_hand) {Hand.new(straight)}
+    subject(:straight_hand) {Hand.new(straight_no_ace)}
+    subject(:straight_ace_high_hand) {Hand.new(straight_ace_high)}
+    subject(:straight_ace_low_hand) {Hand.new(straight_ace_low)}
     subject(:flush_hand) {Hand.new(flush)}
     subject(:full_house_hand) {Hand.new(full_house)}
-    subject(:four_of_a_kind_hand) {Hand.new(four_of_a_kind)}
+    subject(:four_of_a_kind_hand) {Hand.new(four)}
     subject(:full_house_hand) {Hand.new(full_house)}
     subject(:royal_flush_hand) {Hand.new(royal_flush)}
 
@@ -157,10 +159,27 @@ describe Hand do
     it "returns true if hand include at least three of a kind" do
       expect(three_of_a_kind_hand.rank).to eq([:three_of_a_kind, 14, 6, 5])
     end
-    it "returns straignt"
-    it "returns flush"
-    it "returns true if hand is a full house"
-    it "returns four of kind"
+    it "returns straignt without an ace" do
+      expect(straight_hand.rank).to eq([:straight, 6])
+    end
+
+    it "returns a straight with a high ace" do
+      expect(straight_ace_high_hand.rank).to eq([:straight, 14])
+    end
+
+    it "returns a straight with a low ace"
+
+    it "returns flush" do
+      expect(flush_hand.rank).to eq([:flush, 13, 12, 11, 10, 3])
+
+    end
+    it "returns true if hand is a full house" do
+      expect(full_house_hand.rank).to eq([:full_house, 14])
+    end
+
+    it "returns four of kind" do
+      expect(four_of_a_kind_hand.rank).to eq([:four_of_a_kind, 14])
+    end
     it "returns straight flush"
     it "returns royal flush"
 

@@ -57,4 +57,11 @@ describe Card do
 
   end
 
+  describe "#poker_value" do
+    let(:card) {Card.new(:spades, :king)}
+    it "returns the correct poker value" do
+      expect(card.poker_value).to eq(13)
+    end
+  end
+
 end
