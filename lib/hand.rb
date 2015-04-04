@@ -51,31 +51,50 @@ class Hand
 
   def single_pair
     return false unless frequency.values.count == 4
-    
-    rank_num = 0
+    pairs = []
+    remaining_cards = []
     frequency.each do |key, value|
-      rank_num += Card.poker_values[key] * value
+      if value == 2
+        pairs << Card.poker_values[key]
+        next
+      end
+      remaining_cards << Card.poker_values[key]
     end
 
 
-    [:single_pair, pair_rank, first_high_card,
-      second_high_card, third_high_card]
+
+    [:single_pair].concat(pairs).concat(remaining_cards.sort.reverse)
   end
 
 
   def two_pair
-    pairs = 0
-    frequency.values.each do |value|
-      pairs += 1 if value == 2
+    pairs = []
+    remaining_cards = []
+    frequency.each do |key, value|
+      if value == 2
+        pairs << Card.poker_values[key]
+        next
+      end
+      remaining_cards << Card.poker_values[key]
     end
-    return false unless pairs == 2
+    return false unless pairs.length == 2
 
 
-    [:two_pair, ]
+    [:two_pair].concat(pairs.sort.reverse).concat(remaining_cards)
   end
 
   def three_of_a_kind
-
+    triplets = []
+    remaining_cards = []
+    frequency.each do |key, value|
+      if value == 3
+        triplets << Card.poker_values[key]
+        next
+      end
+      remaining_cards << Card.poker_values[key]
+    end
+    return false unless triplets.count == 1 && frequency.keys.size == 3
+    [:three_of_a_kind].concat(triplets).concat(remaining_cards.sort.reverse)
   end
 
   def straight

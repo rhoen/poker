@@ -149,12 +149,14 @@ describe Hand do
 
     it "returns single pair" do
       expect(single_pair_hand.frequency.values.count).to eq(4)
-      expect(single_pair_hand.rank).to eq([:single_pair, 40])
+      expect(single_pair_hand.rank).to eq([:single_pair, 14, 5, 4 ,3])
     end
     it "returns  two pair" do
-      #expect(two_pair_hand.rank).to eq([:single_pair, 20])
+      expect(two_pair_hand.rank).to eq([:two_pair, 14, 5, 3])
     end
-    it "returns true if hand include at least three of a kind"
+    it "returns true if hand include at least three of a kind" do
+      expect(three_of_a_kind_hand.rank).to eq([:three_of_a_kind, 14, 6, 5])
+    end
     it "returns straignt"
     it "returns flush"
     it "returns true if hand is a full house"
