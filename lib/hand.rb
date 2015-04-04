@@ -1,8 +1,7 @@
 class Hand
 
   RANKS = [:single_pair, :two_pair, :three_of_a_kind, :straight,
-        :flush, :full_house, :four_of_a_kind, :straight_flush,
-        :royal_flush]
+        :flush, :full_house, :four_of_a_kind, :straight_flush]
 
 
 
@@ -98,8 +97,9 @@ class Hand
   end
 
   def straight
-    card_values = cards.map {|card| card.poker_value}
-    first = card_values.sort!.first
+    card_values = cards.map {|card| card.poker_value}.sort!
+    return straight_with_ace(card_values) if card_values.include?(14)
+    first = card_values.first
     j = 0
     first.upto(first+4) do |i|
       return false if i != card_values[j]
@@ -107,7 +107,22 @@ class Hand
     end
 
     [:straight, card_values.last]
+  end
 
+  def straight_with_ace(card_values)
+    card_values.pop
+    first = card_values.first
+    j = 0
+    first.upto(first + 3) do |i|
+      return false if i != card_values[j]
+      j += 1
+    end
+
+    if card_values.last == 13
+      [:straight, 14]
+    else
+      [:straight, 5]
+    end
   end
 
   def flush
@@ -146,12 +161,14 @@ class Hand
   end
 
   def straight_flush
-
+    straight = send(:straight)
+    if straight && send(:flush)
+      [:straight_flush, straight[1]]
+    else
+      false
+    end
   end
 
-  def royal_flush
-
-  end
 
 
 end

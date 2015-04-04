@@ -65,6 +65,22 @@ describe Hand do
       Card.new(:clubs, :five)]
     end
 
+    let(:single_pair2) do
+      [Card.new(:spades, :ace),
+      Card.new(:hearts, :deuce),
+      Card.new(:diamonds, :deuce),
+      Card.new(:spades, :four),
+      Card.new(:clubs, :five)]
+    end
+
+    let(:single_pair3) do
+      [Card.new(:hearts, :ace),
+      Card.new(:clubs, :deuce),
+      Card.new(:spades, :deuce),
+      Card.new(:spades, :four),
+      Card.new(:hearts, :five)]
+    end
+
     let(:two_pair) do
       [Card.new(:spades, :ace),
       Card.new(:hearts, :ace),
@@ -129,6 +145,14 @@ describe Hand do
       Card.new(:clubs, :ace)]
     end
 
+    let(:straight_flush) do
+      [Card.new(:spades, :nine),
+      Card.new(:spades, :king),
+      Card.new(:spades, :queen),
+      Card.new(:spades, :jack),
+      Card.new(:spades, :ten)]
+    end
+
     let(:royal_flush) do
       [Card.new(:spades, :ace),
       Card.new(:spades, :king),
@@ -138,6 +162,9 @@ describe Hand do
     end
 
     subject(:single_pair_hand) {Hand.new(single_pair)}
+    subject(:single_pair_hand2) {Hand.new(single_pair2)}
+    subject(:single_pair_hand3) {Hand.new(single_pair3)}
+
     subject(:two_pair_hand) {Hand.new(two_pair)}
     subject(:three_of_a_kind_hand) {Hand.new(three_of_a_kind)}
     subject(:straight_hand) {Hand.new(straight_no_ace)}
@@ -146,8 +173,10 @@ describe Hand do
     subject(:flush_hand) {Hand.new(flush)}
     subject(:full_house_hand) {Hand.new(full_house)}
     subject(:four_of_a_kind_hand) {Hand.new(four)}
-    subject(:full_house_hand) {Hand.new(full_house)}
+    subject(:straight_flush_hand) {Hand.new(straight_flush)}
     subject(:royal_flush_hand) {Hand.new(royal_flush)}
+
+
 
     it "returns single pair" do
       expect(single_pair_hand.frequency.values.count).to eq(4)
@@ -167,12 +196,14 @@ describe Hand do
       expect(straight_ace_high_hand.rank).to eq([:straight, 14])
     end
 
-    it "returns a straight with a low ace"
+    it "returns a straight with a low ace" do
+      expect(straight_ace_low_hand.rank).to eq([:straight, 5])
+    end
 
     it "returns flush" do
       expect(flush_hand.rank).to eq([:flush, 13, 12, 11, 10, 3])
-
     end
+
     it "returns true if hand is a full house" do
       expect(full_house_hand.rank).to eq([:full_house, 14])
     end
@@ -180,16 +211,28 @@ describe Hand do
     it "returns four of kind" do
       expect(four_of_a_kind_hand.rank).to eq([:four_of_a_kind, 14])
     end
-    it "returns straight flush"
-    it "returns royal flush"
+
+    it "returns straight flush" do
+      expect(straight_flush_hand.rank).to eq([:straight_flush, 13])
+    end
 
   end
 
   describe "#=="
 
-  describe "#winning_hand" do
+  describe "#<=>" do
 
-    it ""
+    it "returns -1 if other hand is higher rank" do
+      expect(straight_flush_hand.rank <=> royal_flush_hand.rank).to eq(-1)
+    end
+
+    it "returns 0 if hands are a tie" do
+      expect(single_pair_hand2.rank <=> single_pair_hand3.rank).to eq(0)
+    end
+
+    it "returns 1 if other hand is lower rank" do
+      expect(full_house_hand.rank <=> flush_hand.rank).to eq(1)
+    end
 
   end
 
