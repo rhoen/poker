@@ -38,4 +38,23 @@ describe Card do
     end
   end
 
+  describe "#<=>" do
+    let(:card2) {Card.new(:spades, :king)}
+    let(:card3) {Card.new(:spades, :ace)}
+    let(:card4) {Card.new(:hearts, :king)}
+
+    it "returns -1 if first card is smaller" do
+      expect(card2 <=> card3).to eq(-1)
+    end
+
+    it "returns 0 if cards are same" do
+      expect(card2 <=> card4).to eq(0)
+    end
+
+    it "returns 1 if card is larger" do
+      expect(card3 <=> card4).to eq(1)
+    end
+
+  end
+
 end

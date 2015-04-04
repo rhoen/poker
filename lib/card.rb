@@ -49,12 +49,22 @@ class Card
   def self.poker_values
     POKER_VALUES
   end
-  
+
   attr_reader :suit, :value
 
   def initialize(suit, value)
     @suit = suit
     @value = value
+  end
+
+  def <=>(other_card)
+    if self.poker_value < other_card.poker_value
+      -1
+    elsif self.poker_value == other_card.poker_value
+      0
+    elsif self.poker_value > other_card.poker_value
+      1
+    end
   end
 
   def ==(other_card)

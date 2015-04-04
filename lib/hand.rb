@@ -51,13 +51,15 @@ class Hand
 
   def single_pair
     return false unless frequency.values.count == 4
+    
     rank_num = 0
     frequency.each do |key, value|
       rank_num += Card.poker_values[key] * value
     end
 
 
-    [:single_pair, rank_num]
+    [:single_pair, pair_rank, first_high_card,
+      second_high_card, third_high_card]
   end
 
 
@@ -66,8 +68,10 @@ class Hand
     frequency.values.each do |value|
       pairs += 1 if value == 2
     end
-    return true if pairs == 2
-    false
+    return false unless pairs == 2
+
+
+    [:two_pair, ]
   end
 
   def three_of_a_kind
