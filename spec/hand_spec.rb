@@ -57,7 +57,7 @@ describe Hand do
   end
 
   describe "#rank" do
-    let(:sing_pair) do
+    let(:single_pair) do
       [Card.new(:spades, :ace),
       Card.new(:hearts, :ace),
       Card.new(:diamonds, :three),
@@ -147,10 +147,13 @@ describe Hand do
     subject(:full_house_hand) {Hand.new(full_house)}
     subject(:royal_flush_hand) {Hand.new(royal_flush)}
 
-    it "returns true if hand includes at least a single pair" do
-      expect(single_pair_hand.rank).to eq(:single_pair)
+    it "returns single pair" do
+      expect(single_pair_hand.frequency.values.count).to eq(4)
+      expect(single_pair_hand.rank).to eq([:single_pair, 40])
     end
-    it "returns true if hand includes at least two pair"
+    it "returns  two pair" do
+      #expect(two_pair_hand.rank).to eq([:single_pair, 20])
+    end
     it "returns true if hand include at least three of a kind"
     it "returns straignt"
     it "returns flush"

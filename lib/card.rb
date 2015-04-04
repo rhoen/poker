@@ -46,6 +46,10 @@ class Card
     VALUE_STRINGS.keys.sort
   end
 
+  def self.poker_values
+    POKER_VALUES
+  end
+  
   attr_reader :suit, :value
 
   def initialize(suit, value)
