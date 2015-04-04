@@ -22,6 +22,22 @@ class Card
     :ace   => "A"
   }
 
+  POKER_VALUES = {
+    :deuce => 2,
+    :three => 3,
+    :four  => 4,
+    :five  => 5,
+    :six   => 6,
+    :seven => 7,
+    :eight => 8,
+    :nine  => 9,
+    :ten   => 10,
+    :jack  => 11,
+    :queen => 12,
+    :king  => 13,
+    :ace   => 14
+  }
+
   def self.suits
     SUIT_STRINGS.keys.sort
   end
@@ -43,6 +59,10 @@ class Card
     else
       false
     end
+  end
+
+  def poker_value
+    POKER_VALUES[self.value]
   end
 
 
