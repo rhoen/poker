@@ -36,9 +36,11 @@ class Hand
 
     freq
   end
+  def ranks
+    RANKS.reverse
+  end
 
   def rank
-    ranks = RANKS.reverse
     ranks.each do |method|
       if send(method)
         return send(method)
@@ -167,6 +169,30 @@ class Hand
     else
       false
     end
+  end
+
+  def <=>(other_hand)
+    self_rank = ranks.index(self.rank[0])
+    other_rank = ranks.index(other_hand.rank[0])
+    if self_rank < other_rank
+      return 1
+    elsif self_rank == other_rank
+      self_high_cards = self.rank[1..-1]
+      other_high_cards = other_hand.rank[1..-1]
+      self_high_cards.count.times do |i|
+        if self_high_cards[i] > other_high_cards[i]
+          return 1
+        elsif other_high_cards[i] > self_high_cards[i]
+          return -1
+        else
+          next
+        end
+      end
+      return 0
+    else
+      return -1
+    end
+
   end
 
 

@@ -8,6 +8,126 @@ describe Hand do
     Card.new(:spades, :five),
     Card.new(:spades, :six)]
   end
+  let(:single_pair) do
+    [Card.new(:spades, :ace),
+    Card.new(:hearts, :three),
+    Card.new(:diamonds, :three),
+    Card.new(:spades, :four),
+    Card.new(:clubs, :five)]
+  end
+
+  let(:single_pair2) do
+    [Card.new(:spades, :ace),
+    Card.new(:hearts, :deuce),
+    Card.new(:diamonds, :deuce),
+    Card.new(:spades, :four),
+    Card.new(:clubs, :five)]
+  end
+
+  let(:single_pair3) do
+    [Card.new(:hearts, :ace),
+    Card.new(:clubs, :deuce),
+    Card.new(:spades, :deuce),
+    Card.new(:spades, :four),
+    Card.new(:hearts, :five)]
+  end
+
+  let(:two_pair) do
+    [Card.new(:spades, :ace),
+    Card.new(:hearts, :ace),
+    Card.new(:diamonds, :three),
+    Card.new(:spades, :five),
+    Card.new(:clubs, :five)]
+  end
+
+  let(:three_of_a_kind) do
+    [Card.new(:spades, :ace),
+    Card.new(:hearts, :ace),
+    Card.new(:diamonds, :ace),
+    Card.new(:spades, :five),
+    Card.new(:clubs, :six)]
+  end
+
+  let(:straight_ace_low) do
+    [Card.new(:spades, :ace),
+    Card.new(:hearts, :deuce),
+    Card.new(:diamonds, :three),
+    Card.new(:spades, :four),
+    Card.new(:clubs, :five)]
+  end
+
+  let(:straight_no_ace) do
+    [Card.new(:spades, :six),
+    Card.new(:hearts, :deuce),
+    Card.new(:diamonds, :three),
+    Card.new(:spades, :four),
+    Card.new(:clubs, :five)]
+  end
+
+  let(:straight_ace_high) do
+    [Card.new(:spades, :ace),
+    Card.new(:spades, :king),
+    Card.new(:spades, :queen),
+    Card.new(:spades, :jack),
+    Card.new(:hearts, :ten)]
+  end
+
+  let(:flush) do
+    [Card.new(:spades, :three),
+    Card.new(:spades, :king),
+    Card.new(:spades, :queen),
+    Card.new(:spades, :jack),
+    Card.new(:spades, :ten)]
+  end
+
+  let(:full_house) do
+    [Card.new(:spades, :ace),
+    Card.new(:hearts, :ace),
+    Card.new(:diamonds, :ace),
+    Card.new(:spades, :five),
+    Card.new(:clubs, :five)]
+  end
+
+  let(:four) do
+    [Card.new(:spades, :ace),
+    Card.new(:hearts, :ace),
+    Card.new(:diamonds, :ace),
+    Card.new(:spades, :five),
+    Card.new(:clubs, :ace)]
+  end
+
+  let(:straight_flush) do
+    [Card.new(:spades, :nine),
+    Card.new(:spades, :king),
+    Card.new(:spades, :queen),
+    Card.new(:spades, :jack),
+    Card.new(:spades, :ten)]
+  end
+
+  let(:royal_flush) do
+    [Card.new(:spades, :ace),
+    Card.new(:spades, :king),
+    Card.new(:spades, :queen),
+    Card.new(:spades, :jack),
+    Card.new(:spades, :ten)]
+  end
+
+  subject(:single_pair_hand) {Hand.new(single_pair)}
+  subject(:single_pair_hand2) {Hand.new(single_pair2)}
+  subject(:single_pair_hand3) {Hand.new(single_pair3)}
+
+  subject(:two_pair_hand) {Hand.new(two_pair)}
+  subject(:three_of_a_kind_hand) {Hand.new(three_of_a_kind)}
+  subject(:straight_hand) {Hand.new(straight_no_ace)}
+  subject(:straight_ace_high_hand) {Hand.new(straight_ace_high)}
+  subject(:straight_ace_low_hand) {Hand.new(straight_ace_low)}
+  subject(:flush_hand) {Hand.new(flush)}
+  subject(:full_house_hand) {Hand.new(full_house)}
+  subject(:four_of_a_kind_hand) {Hand.new(four)}
+  subject(:straight_flush_hand) {Hand.new(straight_flush)}
+  subject(:royal_flush_hand) {Hand.new(royal_flush)}
+
+
 
   describe "#initialize" do
     subject(:hand) {Hand.new(cards)}
@@ -57,130 +177,12 @@ describe Hand do
   end
 
   describe "#rank" do
-    let(:single_pair) do
-      [Card.new(:spades, :ace),
-      Card.new(:hearts, :ace),
-      Card.new(:diamonds, :three),
-      Card.new(:spades, :four),
-      Card.new(:clubs, :five)]
-    end
-
-    let(:single_pair2) do
-      [Card.new(:spades, :ace),
-      Card.new(:hearts, :deuce),
-      Card.new(:diamonds, :deuce),
-      Card.new(:spades, :four),
-      Card.new(:clubs, :five)]
-    end
-
-    let(:single_pair3) do
-      [Card.new(:hearts, :ace),
-      Card.new(:clubs, :deuce),
-      Card.new(:spades, :deuce),
-      Card.new(:spades, :four),
-      Card.new(:hearts, :five)]
-    end
-
-    let(:two_pair) do
-      [Card.new(:spades, :ace),
-      Card.new(:hearts, :ace),
-      Card.new(:diamonds, :three),
-      Card.new(:spades, :five),
-      Card.new(:clubs, :five)]
-    end
-
-    let(:three_of_a_kind) do
-      [Card.new(:spades, :ace),
-      Card.new(:hearts, :ace),
-      Card.new(:diamonds, :ace),
-      Card.new(:spades, :five),
-      Card.new(:clubs, :six)]
-    end
-
-    let(:straight_ace_low) do
-      [Card.new(:spades, :ace),
-      Card.new(:hearts, :deuce),
-      Card.new(:diamonds, :three),
-      Card.new(:spades, :four),
-      Card.new(:clubs, :five)]
-    end
-
-    let(:straight_no_ace) do
-      [Card.new(:spades, :six),
-      Card.new(:hearts, :deuce),
-      Card.new(:diamonds, :three),
-      Card.new(:spades, :four),
-      Card.new(:clubs, :five)]
-    end
-
-    let(:straight_ace_high) do
-      [Card.new(:spades, :ace),
-      Card.new(:spades, :king),
-      Card.new(:spades, :queen),
-      Card.new(:spades, :jack),
-      Card.new(:hearts, :ten)]
-    end
-
-    let(:flush) do
-      [Card.new(:spades, :three),
-      Card.new(:spades, :king),
-      Card.new(:spades, :queen),
-      Card.new(:spades, :jack),
-      Card.new(:spades, :ten)]
-    end
-
-    let(:full_house) do
-      [Card.new(:spades, :ace),
-      Card.new(:hearts, :ace),
-      Card.new(:diamonds, :ace),
-      Card.new(:spades, :five),
-      Card.new(:clubs, :five)]
-    end
-
-    let(:four) do
-      [Card.new(:spades, :ace),
-      Card.new(:hearts, :ace),
-      Card.new(:diamonds, :ace),
-      Card.new(:spades, :five),
-      Card.new(:clubs, :ace)]
-    end
-
-    let(:straight_flush) do
-      [Card.new(:spades, :nine),
-      Card.new(:spades, :king),
-      Card.new(:spades, :queen),
-      Card.new(:spades, :jack),
-      Card.new(:spades, :ten)]
-    end
-
-    let(:royal_flush) do
-      [Card.new(:spades, :ace),
-      Card.new(:spades, :king),
-      Card.new(:spades, :queen),
-      Card.new(:spades, :jack),
-      Card.new(:spades, :ten)]
-    end
-
-    subject(:single_pair_hand) {Hand.new(single_pair)}
-    subject(:single_pair_hand2) {Hand.new(single_pair2)}
-    subject(:single_pair_hand3) {Hand.new(single_pair3)}
-
-    subject(:two_pair_hand) {Hand.new(two_pair)}
-    subject(:three_of_a_kind_hand) {Hand.new(three_of_a_kind)}
-    subject(:straight_hand) {Hand.new(straight_no_ace)}
-    subject(:straight_ace_high_hand) {Hand.new(straight_ace_high)}
-    subject(:straight_ace_low_hand) {Hand.new(straight_ace_low)}
-    subject(:flush_hand) {Hand.new(flush)}
-    subject(:full_house_hand) {Hand.new(full_house)}
-    subject(:four_of_a_kind_hand) {Hand.new(four)}
-    subject(:straight_flush_hand) {Hand.new(straight_flush)}
-    subject(:royal_flush_hand) {Hand.new(royal_flush)}
 
 
 
     it "returns single pair" do
       expect(single_pair_hand.frequency.values.count).to eq(4)
-      expect(single_pair_hand.rank).to eq([:single_pair, 14, 5, 4 ,3])
+      expect(single_pair_hand.rank).to eq([:single_pair, 3, 14, 5, 4])
     end
     it "returns  two pair" do
       expect(two_pair_hand.rank).to eq([:two_pair, 14, 5, 3])
@@ -218,22 +220,25 @@ describe Hand do
 
   end
 
-  describe "#=="
+
 
   describe "#<=>" do
 
     it "returns -1 if other hand is higher rank" do
-      expect(straight_flush_hand.rank <=> royal_flush_hand.rank).to eq(-1)
+      expect(straight_flush_hand <=> royal_flush_hand).to eq(-1)
     end
 
     it "returns 0 if hands are a tie" do
-      expect(single_pair_hand2.rank <=> single_pair_hand3.rank).to eq(0)
+      expect(single_pair_hand2 <=> single_pair_hand3).to eq(0)
     end
 
     it "returns 1 if other hand is lower rank" do
-      expect(full_house_hand.rank <=> flush_hand.rank).to eq(1)
+      expect(full_house_hand <=> flush_hand).to eq(1)
     end
 
+    it  "correclty compares two single pair hands"do
+      expect(single_pair_hand <=> single_pair_hand2).to eq(1)
+    end
   end
 
 
